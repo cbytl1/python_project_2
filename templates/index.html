@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоды</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Сравните погоду в двух городах</h1>
+    </header>
+
+    <form action="/" method="post">
+        <label for="first_city">Город 1:</label>
+        <input type="text" id="first_city" name="first_city" required>
+
+        <label for="second_city">Город 2:</label>
+        <input type="text" id="second_city" name="second_city" required>
+
+        <button type="submit">Сравнить</button>
+    </form>
+
+    {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+    {% if result %}
+        <div class="result">
+            <img src="../static/img.png" alt="Weather Icon" class="icon">
+            <h2>Результаты сравнения:</h2>
+
+            <h3>Погода в {{ result.first_city.name }}</h3>
+            <p>Температура: {{ result.first_city.temp }}°C</p>
+            <p>Скорость ветра: {{ result.first_city.wind }} км/ч</p>
+            <p>Вероятность осадков: {{ result.first_city.rain_chance }}%</p>
+            <p>Влажность: {{ result.first_city.humidity }}%</p>
+            <p class="weather-status">Статус погоды: {{ result.first_city.status }}</p>
+
+            <h3>Погода в {{ result.second_city.name }}</h3>
+            <p>Температура: {{ result.second_city.temp }}°C</p>
+            <p>Скорость ветра: {{ result.second_city.wind }} км/ч</p>
+            <p>Вероятность осадков: {{ result.second_city.rain_chance }}%</p>
+            <p>Влажность: {{ result.second_city.humidity }}%</p>
+            <p class="weather-status">Статус погоды: {{ result.second_city.status }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
